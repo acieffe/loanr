@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+:root {
+	--gold: #d0b64f;
+	--ltGold: #f0d547;
+	--dkGold: #916f27;
+	--dkSteel: #222;
+	--ltSteel: #444;
+	--white: #f8f9fa;
+}
+
+body {
+	background: url(../img/kitsugi.gif);
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+a {
+	text-decoration: none;
+}
+
+.thick {
+	font-weight: 600;
+}
+
+
+.sticky-nav {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.navbar {
+	font-family: 'Italianno', cursive;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.nav-item a {
+	font-size: 2em;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+	color: var(--dkSteel);
+}
+
+.navbar-dark .navbar-nav .nav-link:active {
+	color: var(--dkSteel);
+}
+
+.navbar-dark .navbar-toggler {
+	color: rgba(255, 255, 255, 0.55);
+	border: var(--gold) 3px groove;
+}
+
+.header-logo {
+	font-size: 3em;
+	text-decoration: none;
+}
+
+.font-raleway{
+   font-family: 'Raleway', sans-serif;
+}
+
+.header-logo:hover {
+	color: var(--gold);
+}
+
+.nav-item:hover {
+	border-radius: 15px;
+	background: rgba(34, 34, 34, 0.3);
+	transition: background 1s;
+}
+
+.checklist > li i {
+	color: var(--gold);
+}
+
+#results b {
+	color: var(--gold);
+}
+
+.footer-radius {
+	border-radius: 20px 20px 0 0;
+}
+
+.footer-list {
+	line-height: 1;
+	font-size: smaller;
+}
+
+footer li {
+	padding-top: 4px;
+}
+
+footer a:hover,
+footer i:hover {
+	color: var(--white);
+}
+
+.footer-p a:hover {
+	color: var(--white);
+}
+
+.footer-p {
+	font-size: x-small;
+	margin-bottom: 0;
+}
+
+@media only screen and (min-width: 992px) {
+   .nav-link i {
+      color: var(--gold);
+   }
+}
+
+@media only screen and (max-width: 1060px) {
+	.header-logo {
+		font-size: 2.5em;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	#de-logo {
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.header-logo {
+		font-size: 1.5em;
+	}
+}
+
+@media only screen and (max-width: 340px) {
+	.header-logo {
+		font-size: 1em;
+	}
+}
+
+.minHeight {
+	height: 100%;
+}
+
+.bg-gold {
+	background-image: linear-gradient(to left bottom, var(--ltGold), var(--dkGold), var(--ltGold));
+}
+
+.border-gold {
+	border: var(--gold) 3px groove;
+}
+
+.border-bottom-gold {
+	border-bottom: var(--gold) 3px groove;
+}
+
+.text-gold {
+	color: var(--gold);
+}
+
+.link-gold {
+	color: var(--gold);
+}
+
+.link-gold-hover:hover {
+	color: var(--dkSteel);
+}
+
+.text-black {
+	color: var(--dkSteel);
+}
+
+.bg-black {
+	background-color: rgba(34, 34, 34, 1);
+}
+
+.bg-black-2 {
+	background-color: rgba(34, 34, 34, 0.2);
+}
+
+.bg-black-4 {
+	background-color: rgba(34, 34, 34, 0.4);
+}
+
+.bg-black-6 {
+	background-color: rgba(34, 34, 34, 0.6);
+}
+
+.bg-black-8 {
+	background-color: rgba(34, 34, 34, 0.8);
+}
+
+.bg-steel {
+	background-image: linear-gradient(to left bottom, var(--dkSteel), var(--ltSteel), var(--dkSteel));
+}
+
+code[class*="language-"], pre[class*="language-"] {
+	white-space: pre-wrap;
+	word-break: break-all;
+	word-wrap: break-word;
+	font-size: .85rem !important;
+}
