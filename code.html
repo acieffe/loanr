@@ -99,20 +99,119 @@
                <div class="col-lg-8 mb-lg-5">
                   <pre class="line-numbers">
                      <code class="language-javascript">
+// validate input
+function isValid() {
+   let principle = document.getElementById('principle').value;
+   let term = document.getElementById('term').value;
+   let rate = document.getElementById('rate').value / 1200;
 
-                           // Call Hello World alert
-                           function helloWorld() {
-                              alert("Hello, World");
-                           }
+   if (principle === "" || term === "" || rate === "") {
+      alert('Please fill in all entries.');
+   } else if (principle <= 0) {
+      alert('Please enter a loan amount higher than zero (0).');
+   } else if (term <= 0) {
+      alert('Please enter a term in months higher than zero (0).');
+   } else if (term != Math.ceil(term)) {
+      alert('Please enter a term in whole numbers')
+   } else if (rate < 0) {
+      alert('Please enter an iterest rate zero (0) or higher.');
+   } else {
+      outputTotals(principle, term, rate);
+   }
+}
+
+// This function calculates totals and injects them into the page
+function outputTotals(principle, term, rate) {
+
+   let monthPay = (principle * (rate) / (1 - Math.pow(1 / (1 + rate), term)));
+   // calls fill table to calculate the toal interest paid
+   let totalInt = fillTable(principle, term, rate, monthPay);
+   let cost = parseFloat(principle) + parseFloat(totalInt);
+
+   // Print to page the total section data
+   document.getElementById('monthPay').innerHTML = `$${parseFloat(monthPay).toFixed(2)}`;
+   document.getElementById('totalPrinc').innerHTML = `$${parseFloat(principle).toFixed(2)}`;
+   document.getElementById('totalInt').innerHTML = `$${parseFloat(totalInt).toFixed(2)}`;
+   document.getElementById('totalCost').innerHTML = `$${parseFloat(cost).toFixed(2)}`;
+}
+
+// This function calculates the desired table columns of data and places it in an array of objects
+function fillTable(principle, term, rate, monthPay) {
+
+	let balance = principle;
+   let interest = 0;
+   let totalInt = 0;
+	let mortTable = []; // array to hold objects
+
+	for (let index = 0; index < term; index++) {
+		interest = balance * rate;
+
+		if (balance < monthPay) {
+			monthPay = balance + interest;
+		}
+
+		principle = monthPay - interest;
+
+		// create object containing each row of the table
+		mortTable[index] = {
+			month: index + 1,
+			payment: monthPay,
+			principle: principle,
+			interest: interest,
+			totalInt: (totalInt += interest),
+			balance: (balance -= principle),
+		};
+	}
+
+   // Send mortTable array to be displayed on page
+   displayTable(mortTable);
+   
+   // Returns the total interest to outputTotals function
+   return totalInt;
+}
+
+// Function to output array of objects into page table
+function displayTable(mortTable) {
+   // get table from page
+   let tableBody = document.getElementById('results');
+
+   // get template row
+   let rowTemp = document.getElementById('loanTemplate');
+
+   // clear table
+   tableBody.innerHTML = "";
+
+   for (let index = 0; index < mortTable.length; index ++) {
+
+      let tableRow = document.importNode(rowTemp.content, true);
+
+      let rowCols = tableRow.querySelectorAll('td');
+
+      rowCols[0].textContent = mortTable[index].month;
+      rowCols[1].textContent = `$${parseFloat(mortTable[index].payment).toFixed(2)}`;
+      rowCols[2].textContent = `$${parseFloat(mortTable[index].principle).toFixed(2)}`;
+      rowCols[3].textContent = `$${parseFloat(mortTable[index].interest).toFixed(2)}`;
+      rowCols[4].textContent = `$${parseFloat(mortTable[index].totalInt).toFixed(2)}`;
+      rowCols[5].textContent = `$${parseFloat(mortTable[index].balance).toFixed(2)}`;
+
+      tableBody.appendChild(tableRow);
+   }
+}
 							</code>
                   </pre>
                </div>
 
 		<!-- Code Description Area -->
                <div class="col-lg-4 pb-5 mb-5 ">
-                  <p>The Code is structured in one function</p>
-                  <h5>Hello World</h5>
-                  <p>Hello World is a function that displays an alert the the message of, "Hello, World"</p>
+                  <p>The Code is structured in the following functions</p>
+                  <h5>isValid</h5>
+                  <p>isValid is a function that takes in the user input and verifies that is valid, ie input cannot be empty, larger than zero for loan amount and term, and term cannot be a float. Interest rate can be a zero, but not less than zero. It then sends the data collected to outputTotals</p>
+                  <h5>outputTotals</h5>
+                  <p>outputTotals is a function that displays the monthly payment needed to pay off the loan in the desired time, the original loan amount, the total interest over the time of the loan, and the total cost of the entire loan to the user. Monthly payment is calculated using the passed principle, term and interest rate. In order to calculate total interest, fillTable is called and passed the prior known variables and not the monthly payment. See fillTable for more details. Cost is computed by adding the principle and total interest together. All of these are displayed in a fixed two decimal format</p>
+                  <h5>fillTable</h5>
+                  <p>fillTable is a function that creates and array of objects. Looping through each month by the length of term, it adds values for each item needed to display in each month row of the schedule table. It then sends the array of objects, mortTable, to displayTable. Total Interest is compounded as it differs each month dependant upon the balance. This is then returned to outputTotals for display.</p>
+                  <h5>displayTable</h5>
+                  <p>displayTable is a function that takes in the array of objects mortTable and displays each month in a row with the items of the object in their own column. First area of the page is located and then the templat of the table row is collected from the html. Then the table is cleared if needed. the function then loops through the array of objects placing each item in the correct column and places the entire row to the table.</p>
                </div>
 					<div class="col-12 d-none d-lg-block my-4"></div> <!-- Gives more padding under code section -->
             </div>
