@@ -155,6 +155,10 @@ footer i:hover {
 	border-bottom: var(--gold) 3px groove;
 }
 
+.border-radius {
+	border-radius: 20px;
+}
+
 .text-gold {
 	color: var(--gold);
 }

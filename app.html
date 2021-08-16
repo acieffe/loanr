@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 	<head>
-		<title>App Name: A Coding Project By Ace Baugh</title>
+		<title>LOANr: A Coding Project By Ace Baugh</title>
 		<!-- Required meta tags -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -28,7 +28,7 @@
 				<!-- Navbar Logo -->
 				<div class="ps-2">
 					<a href="http://digitalelegance.com/index.html"></a
-					><a href="index.html" class="navbar-brand header-logo"><img src="img/DE.svg" class="d-inline-block align-text-top mt-1" height="40px">***APP NAME***</a>
+					><a href="index.html" class="navbar-brand header-logo"><img src="img/DE.svg" class="d-inline-block align-text-top mt-1" height="40px">LOANr</a>
 				</div>
 				<button
 					class="navbar-toggler border-gold"
@@ -70,7 +70,7 @@
 
 						<!-- Link - GitHub Repo -->
 						<li class="nav-item px-3 px-lg-0">
-							<a class="nav-link" id="gitLink" target="_blank" href="https://github.com/acieffe/APP NAME"
+							<a class="nav-link" id="gitLink" target="_blank" href="https://github.com/acieffe/loanr"
 								><i class="fab fa-github me-1 h4"></i></svg
 								>Git Repo</a
 							>
@@ -90,7 +90,83 @@
 
 		<!-- ====== Maiu Section ====== -->
 		<main class="flex-shrink-0 d-flex pb-2 mb-5">
-			<div class="container col-xxl-8 px-4 py-5 my-5 bg-black-8 text-light">
+			<div class="container-fluid col-xxl-10 px-4 py-5 my-5 bg-black-8 text-light">
+				<div class="row mb-3">
+					
+					<!-- Input Form -->
+					<div class="col-5 bg-steel p-3 border-gold border-radius me-3">
+						<form class="d-flex flex-column h-100">
+							<div class="row" id="input">
+								<div class="row align-items-center mb-3">
+									<div class="col-12 col-md-6">Loan Amount</div>
+									<div class="col-12 col-md-6">
+										<div class="input-group">
+											<span class="input-group-text">$</span>
+											<input type="number" id="principle" class="form-control" aria-label="Loan Amount" placeholder="25000">
+										</div>
+									</div>
+								</div>
+								<div class="row align-items-center mb-3">
+									<div class="col-12 col-md-6">Term (Months)</div>
+									<div class="col-12 col-md-6">
+										<input type="number" id="term" class="form-control" aria-label="Term (Months)" placeholder="60">
+									</div>
+								</div>
+								<div class="row align-items-center mb-3">
+									<div class="col-12 col-md-6">Interest Rate</div>
+									<div class="col-12 col-md-6">
+										<div class="input-group">
+											<input type="number" id="rate" class="form-control" aria-label="Interest Rate" placeholder="5">
+											<span class="input-group-text">%</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row flex-grow-1" id="calcButton">
+								<div class="row align-items-end">
+									<div class="col-md-6"></div>
+									<div class="col-12 col-md-6">
+										<button type="button" class="btn btn-warning w-100" id="btnSubmit">Calculate</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<!-- Total Output -->
+					<div class="col p-3 border-gold border-radius text-light">
+						<h1 class="text-center">Your Monthly Payments</h1>
+						<h2 class="text-center p-3" id="monthPay">$0.00</h2>
+								<div class="row align-items-center mb-3">
+								<div class="col col-md-9 ">Total Principle</div>
+								<div class="col col-md-3" id="totalPrinc">$0.00</div>
+								</div>
+								<div class="row align-items-center mb-3">
+								<div class="col col-md-9">Total Interest</div>
+								<div class="col col-md-3" id="totalInt">$0.00</div>
+								</div>
+								<div class="row align-items-center mb-3">
+								<div class="col col-md-9">Total Cost</div>
+								<div class="col col-md-3" id="totalCost">$0.00</div>
+								</div>
+					</div>
+				</div>
+
+				<!-- Amortization Table -->
+				<table class="table table-striped table-dark table-hover text-gold">
+					<thead>
+						<tr>
+						<td scopre="col">Month</td>
+						<td scopre="col">Payment</td>
+						<td scopre="col">Principle</td>
+						<td scopre="col">Interest</td>
+						<td scopre="col">Total Interest</td>
+						<td scopre="col">Balance</td>
+						</tr>
+					</thead>
+					<tbody id="results">
+					</tbody>
+				</table>
 			</div>
 		</main>
 
@@ -149,6 +225,17 @@
 		</footer>
 
 
+		<template id="loanTemplate">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</template>
+
 		<!-- Bootstrap JS -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -161,5 +248,9 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="js/site.js"></script>
+		<script>
+			document.getElementById ('btnSubmit').addEventListener('click', isValid);
+			//document.getElementById('btnEmpty').addEventListener("click", emptyTable);
+		</script>
 	</body>
 </html>
